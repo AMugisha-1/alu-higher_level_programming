@@ -1,15 +1,11 @@
 #!/usr/bin/python3
-"""
-Module 1-hbtn_header.py
-"""
+"""sends request to the url and displays the values"""
 
-
+import sys
 import urllib.request
-from sys import argv
-
 
 if __name__ == "__main__":
-    req = urllib.request.Request(argv[1])
-    with urllib.request.urlopen(req) as response:
-        data = response.getheader('X-Request-Id')
-        print(data)
+    url = sys.argv[1]
+    req = urllib.request.Request(url)
+    with urllib.request.urlopen(req) as answer:
+        print(dict(answer.headers).get("X-Request-Id"))
