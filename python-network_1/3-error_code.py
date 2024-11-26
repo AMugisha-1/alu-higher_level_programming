@@ -1,18 +1,20 @@
 #!/usr/bin/python3
-"""
-Module 3-error_code.py
-"""
+"""scipt that intakes the url"""
 
-
-import urllib.request
-import urllib.error
 from sys import argv
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 
 
 if __name__ == "__main__":
-    req = urllib.request.Request(argv[1])
+    "lets begin"
+    url = argv[1]
+    req = Request(url)
+
     try:
-        with urllib.request.urlopen(req) as response:
-            print(response.read().decode('utf-8'))
-    except urllib.error.HTTPError as e:
-        print("Error code:", e.code)
+        with urlopen(req) as response:
+            print(response.read().decode("utf-8"))
+    except HTTPError as e:
+        print("Error code: {}".format(e.code))
+    except URLError as e:
+        print(e.reason)
