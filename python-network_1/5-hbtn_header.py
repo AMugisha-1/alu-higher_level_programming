@@ -1,15 +1,10 @@
 #!/usr/bin/python3
-"""
-Module 5-hbtn_header.py
-"""
+"""Displays the header"""
 
-
-from sys import argv
+import sys
 import requests
 
-
 if __name__ == "__main__":
-    url = argv[1]
-    le = requests.get(url)
-    la = le.headers.get('X-Request-Id')
-    print(la)
+    url = sys.argv[1]
+    req = requests.get(url)
+    print(req.headers.get("X-Request-Id"))
