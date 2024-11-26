@@ -1,25 +1,18 @@
 #!/usr/bin/python3
-"""
-Module 8-json_api.py
-"""
-
-
+"""sends the post"""
+import sys
 import requests
-from sys import argv
 
 
 if __name__ == "__main__":
-    if len(argv) < 2:
-        le = ""
-    else:
-        le = argv[1]
-    dic = {"q": le}
-    resp = requests.post('http://0.0.0.0:5000/search_user', data=dic)
+    le = "" if len(sys.argv) == 1 else sys.argv[1]
+    pay = {"q": le}
+    req = requests.post("http://0.0.0.0:5000/search_user", data=pay)
     try:
-        dic_1 = resp.json()
-        if dic_1:
-            print("[{}] {}".format(dic_1.get('id'), dic_1.get('name')))
-        else:
+        res = req.json()
+        if res == {}:
             print("No result")
-    except ValueError as e:
+        else:
+            print("[{}] {}".format(res.get("id"), res.get("name")))
+    except ValueError:
         print("Not a valid JSON")
