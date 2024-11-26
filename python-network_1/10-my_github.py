@@ -1,15 +1,11 @@
 #!/usr/bin/python3
-"""
-Module 10-my_github.py
-"""
-
-
+"""use the github api"""
+import sys
 import requests
-from sys import argv
 from requests.auth import HTTPBasicAuth
 
 
 if __name__ == "__main__":
-    url = 'https://api.github.com/user'
-    resp = requests.get(url, auth=HTTPBasicAuth(argv[1], argv[2]))
-    print(resp.json().get('id'))
+    au = HTTPBasicAuth(sys.argv[1], sys.argv[2])
+    req = requests.get("https://api.github.com/user", auth=au)
+    print(req.json().get("id"))
