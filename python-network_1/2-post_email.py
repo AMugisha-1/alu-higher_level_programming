@@ -1,20 +1,18 @@
 #!/usr/bin/python3
 """
-Module 2-post_email.py
+script that intakes URL and email for CLI
+sends a POST request to the passed URL
 """
 
-
-import urllib.parse
+import sys
 import urllib.request
-from sys import argv
+import urllib.parse
 
-
-if __name__ == "__main__":
-    url = argv[1]
-    value = {"email": argv[2]}
-    data = urllib.parse.urlencode(value)
-    data = data.encode('ascii')
-    req = urllib.request.Request(url, data)
-    with urllib.request.urlopen(req) as response:
-        page = response.read().decode('utf-8')
-        print(page)
+if __name__ == '__main__':
+    """START"""
+    email = sys.argv[2]
+    url = sys.argv[1]
+    data = urllib.parse.urlencode({'email': email}).encode("utf-8")
+    request = urllib.request.Request(url, data=data, method="POST")
+    with urllib.request.urlopen(request) as f:
+        print(f.read().decode("utf-8"))
