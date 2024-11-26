@@ -1,3 +1,3 @@
 #!/bin/bash
-#sends a DELETE request to the URL passed as the first argument and displays the body of the response
+# Script to test if a route accepts the DELETE HTTP method
 curl -sX DELETE "$1"
