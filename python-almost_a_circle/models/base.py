@@ -4,6 +4,7 @@ This module defines the `Base` class, which serves as the base class
 for other models in this project.
 """
 
+
 class Base:
     """
     A base class to manage unique IDs for instances.
