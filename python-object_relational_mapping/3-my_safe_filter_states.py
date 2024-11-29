@@ -38,8 +38,11 @@ def connect_and_query(database_name, state_name):
 
         # Fetch and display results
         results = cursor.fetchall()
-        for row in results:
-            print(row)
+        if results:
+            for row in results:
+                print(row)
+        else:
+            print("No matching records found.")
 
     except MySQLdb.Error as error:
         print(f"Database error: {error}")
