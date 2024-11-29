@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 """
-Module Name: SQL Injection Prevention
-Description: This script securely queries a MySQL database for a given state name.
-Author: AMugisha-1
-Date: November 29, 2024
+A script to securely query a MySQL database for states by name.
+Prevents SQL injection by using parameterized queries.
 """
 
 import MySQLdb
 import sys
-
 
 def connect_and_query(database_name, state_name):
     """
@@ -33,16 +30,13 @@ def connect_and_query(database_name, state_name):
         cursor = db.cursor()
 
         # Securely query the database with placeholders to prevent SQL injection
-        query = "SELECT * FROM states WHERE name = %s"
+        query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
         cursor.execute(query, (state_name,))
 
         # Fetch and display results
         results = cursor.fetchall()
-        if results:
-            for row in results:
-                print(row)
-        else:
-            print("No matching records found.")
+        for row in results:
+            print(row)  # Ensure tuple format for output
 
     except MySQLdb.Error as error:
         print(f"Database error: {error}")
@@ -54,7 +48,6 @@ def connect_and_query(database_name, state_name):
         if db:
             db.close()
 
-
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         # Connect to the database and search for the provided state name
@@ -62,3 +55,4 @@ if __name__ == "__main__":
     else:
         # Display usage information if arguments are incorrect
         print("Usage: ./script.py <state_name>")
+        sys.exit(1)  # Exit to prevent further execution
